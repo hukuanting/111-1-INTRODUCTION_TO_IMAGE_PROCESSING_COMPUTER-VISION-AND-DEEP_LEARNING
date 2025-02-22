@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QFileDialog
 import cv2
 import utils
 import numpy as np
-from test import Ui_MainWindow
+from ui import Ui_MainWindow
 import cv2
 import os
 import matplotlib.pyplot as plt
