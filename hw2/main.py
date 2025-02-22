@@ -13,27 +13,27 @@ class MainWindow_controller(QtWidgets.QMainWindow):
 
     def __init__(self):
         super().__init__()  # in python3, super(Class, self).xxx = super().xxx
-        self.test = Ui_MainWindow()
-        self.test.setupUi(self)
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)
 
-        self.test.LF.clicked.connect(self.LF)
-        self.test.LIL.clicked.connect(self.LIL)
-        self.test.LIR.clicked.connect(self.LIR)
+        self.ui.LF.clicked.connect(self.LF)
+        self.ui.LIL.clicked.connect(self.LIL)
+        self.ui.LIR.clicked.connect(self.LIR)
 
-        self.test.oneone.clicked.connect(self.draw_contour)
-        self.test.onetwo.clicked.connect(self.count_rings)
+        self.ui.oneone.clicked.connect(self.draw_contour)
+        self.ui.onetwo.clicked.connect(self.count_rings)
 
-        self.test.twoone.clicked.connect(self.corner_detection)
-        self.test.twotwo.clicked.connect(self.Intrinsic_Matrix)
+        self.ui.twoone.clicked.connect(self.corner_detection)
+        self.ui.twotwo.clicked.connect(self.Intrinsic_Matrix)
         choices = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']
-        self.test.comboBox.addItems(choices)
-        self.test.comboBox.currentIndexChanged.connect(self.combo_box)
-        self.test.twothree.clicked.connect(self.Extrinsic_Matrix)
-        self.test.twofour.clicked.connect(self.Distortion_Matrix)
-        self.test.twofive.clicked.connect(self.undistorted)
+        self.ui.comboBox.addItems(choices)
+        self.ui.comboBox.currentIndexChanged.connect(self.combo_box)
+        self.ui.twothree.clicked.connect(self.Extrinsic_Matrix)
+        self.ui.twofour.clicked.connect(self.Distortion_Matrix)
+        self.ui.twofive.clicked.connect(self.undistorted)
 
-        self.test.threeone.clicked.connect(self.On_Board)
-        self.test.threetwo.clicked.connect(self.Vertically)
+        self.ui.threeone.clicked.connect(self.On_Board)
+        self.ui.threetwo.clicked.connect(self.Vertically)
         self.char_in_board = [
             [7, 5, 0],  # slot 1
             [4, 5, 0],  # slot 2
@@ -43,8 +43,8 @@ class MainWindow_controller(QtWidgets.QMainWindow):
             [1, 2, 0]  # slot 6
         ]
         self.q4_1 = False
-        self.test.fourone.clicked.connect(self.Stereo)
-        self.test.fourtwo.clicked.connect(self.checkDisparity)
+        self.ui.fourone.clicked.connect(self.Stereo)
+        self.ui.fourtwo.clicked.connect(self.checkDisparity)
 
     def LF(self):
         self.folder_path = QFileDialog.getExistingDirectory(self, "Open folder", "./")
@@ -107,8 +107,8 @@ class MainWindow_controller(QtWidgets.QMainWindow):
         string1 = "There are "+str(ans1 / 2)+" rings in img_1.jpg"
         string2 = "There are "+str(ans2 / 2)+" rings in img_1.jpg"
 
-        self.test.label.setText(string1)
-        self.test.label_2.setText(string2)
+        self.ui.label.setText(string1)
+        self.ui.label_2.setText(string2)
 
     def corner_detection(self):
         w = 11
@@ -160,7 +160,7 @@ class MainWindow_controller(QtWidgets.QMainWindow):
         print(mtx)
 
     def combo_box(self):
-        self.num = self.test.comboBox.currentText()
+        self.num = self.ui.comboBox.currentText()
 
     def Extrinsic_Matrix(self):
         w = 11
@@ -266,7 +266,7 @@ class MainWindow_controller(QtWidgets.QMainWindow):
     def On_Board(self):
         w = 11
         h = 8
-        string = self.test.text.text()[:6]
+        string = self.ui.text.text()[:6]
         fs = cv2.FileStorage("alphabet_lib_onboard.txt", cv2.FILE_STORAGE_READ)
 
         criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
@@ -320,7 +320,7 @@ class MainWindow_controller(QtWidgets.QMainWindow):
     def Vertically(self):
         w = 11
         h = 8
-        string = self.test.text.text()[:6]
+        string = self.ui.text.text()[:6]
         fs = cv2.FileStorage("alphabet_lib_vertical.txt", cv2.FILE_STORAGE_READ)
         criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
         objp = np.zeros((h * w, 3), np.float32)
